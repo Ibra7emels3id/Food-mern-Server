@@ -21,16 +21,28 @@ require('dotenv').config();
 
 // Server configuration settings for express
 app.use(cors({
-    // origin: 'http://localhost:5173',
-    origin: 'https://food-mern-nfam.onrender.com',
+    origin: 'http://localhost:5173',
+    // origin: 'https://food-mern-nfam.onrender.com',
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept', 'X-Custom-Header'],
     credentials: true
 }))
 app.use(express())
 app.use(express.json())
 
 // Serve static files from the 'public' directory
-// app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use('/Uploads', express.static(path.join(__dirname, 'public/Uploads')));
+
+
+// 
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    next();
+});
+
+
 
 // Router 
 app.use('/api', UserRouterClint)
