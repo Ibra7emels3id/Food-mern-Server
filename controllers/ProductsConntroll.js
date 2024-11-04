@@ -37,7 +37,22 @@ const products = async (req, res) => {
 // update product
 const updateProduct = async (req, res) => {
     try {
-        const product = await Products.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        if (!req.body.title ||!req.body.price ||!req.body.description ||!req.body.category ||!req.body.count ||!req.body.categoryFluidclass ||!req.body.categoryCanned ||!req.body.rating) {
+            return res.status(400).json({ msg: "Please fill all fields" })
+        }
+        const product ={
+            title: req.body.title,
+            price: req.body.price,
+            description: req.body.description,
+            image: req.file? req.file.filename : product.image,
+            category: req.body.category,
+            count: req.body.count,
+            categoryFluidclass: req.body.categoryFluidclass,
+            categoryCanned: req.body.categoryCanned,
+            rating: req.body.rating
+        }
+
+        const product = await Products.findByIdAndUpdate(req.params.id, product , { new: true })
         if (!product) return res.status(404).json({ msg: "Product not found" })
             res.status(200).json({ msg: "Product update successfully" , product })
     } catch (error) {
