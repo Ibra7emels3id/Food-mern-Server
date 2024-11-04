@@ -37,14 +37,11 @@ const products = async (req, res) => {
 // update product
 const updateProduct = async (req, res) => {
     try {
-        if (!req.body.title ||!req.body.price ||!req.body.description ||!req.body.category ||!req.body.count ||!req.body.categoryFluidclass ||!req.body.categoryCanned ||!req.body.rating) {
-            return res.status(400).json({ msg: "Please fill all fields" })
-        }
         let data ={
             title: req.body.title,
             price: req.body.price,
             description: req.body.description,
-            image: req.file? req.file.filename : product.image,
+            image:req.file.filename,
             category: req.body.category,
             count: req.body.count,
             categoryFluidclass: req.body.categoryFluidclass,
