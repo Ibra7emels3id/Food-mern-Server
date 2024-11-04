@@ -40,7 +40,7 @@ const updateProduct = async (req, res) => {
         if (!req.body.title ||!req.body.price ||!req.body.description ||!req.body.category ||!req.body.count ||!req.body.categoryFluidclass ||!req.body.categoryCanned ||!req.body.rating) {
             return res.status(400).json({ msg: "Please fill all fields" })
         }
-        const product ={
+        let data ={
             title: req.body.title,
             price: req.body.price,
             description: req.body.description,
@@ -52,7 +52,7 @@ const updateProduct = async (req, res) => {
             rating: req.body.rating
         }
 
-        const product = await Products.findByIdAndUpdate(req.params.id, product , { new: true })
+        const product = await Products.findByIdAndUpdate(req.params.id, data , { new: true })
         if (!product) return res.status(404).json({ msg: "Product not found" })
             res.status(200).json({ msg: "Product update successfully" , product })
     } catch (error) {
