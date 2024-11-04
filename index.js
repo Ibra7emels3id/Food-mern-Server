@@ -21,8 +21,8 @@ require('dotenv').config();
 
 // Server configuration settings for express
 app.use(cors({
-    origin: 'http://localhost:5173',
-    // origin: 'https://food-mern-nfam.onrender.com',
+    // origin: 'http://localhost:5173',
+    origin: 'https://food-mern-nfam.onrender.com',
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept', 'X-Custom-Header'],
