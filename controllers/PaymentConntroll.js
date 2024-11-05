@@ -15,17 +15,10 @@ const PaymentConntrol = async (req, res, next) => {
             currency,
             payment_method_types: ['card'],
             metadata: {
-                // items: JSON.stringify(items),
-                // name,
-                // CartName,
-                // phone,
-                // address,
-                // totalPrice: amount,
-                // tex,
-                // discount: discount,
-                // email,
-                // date: new Date().toDateString(),
-                // time: new Date().toLocaleTimeString(),
+                items: JSON.stringify(items),
+                CartName,
+                date: new Date().toDateString(),
+                time: new Date().toLocaleTimeString(),
             },
         });
 
