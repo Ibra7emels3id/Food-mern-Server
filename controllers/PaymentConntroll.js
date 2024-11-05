@@ -4,7 +4,7 @@ const CardModel = require('../models/Cart');
 const CartPay = require('../models/CartPayment');
 
 // Payment STRIPE
-const stripe = require('stripe')('sk_test_51PDqAJP7DuJ1bxg98QMZ7sMJtpg3SxWCzeGcqAk7XIs4g2tQuz1YSKQRmqf1o9UdpZjDqhAfs6FIrLNCYn4GQ9iE004h3sBMlP');
+const stripe = require('stripe')('sk_test_51PL8qABeVHROBfrLK5GN0GXRr02ExTuTCBdh4DdUksydftJOizV7OxREFS8WXBngO1500q4j1RlOIEWIUdtHFEMD00NJMgQhym');
 
 const PaymentConntrol = async (req, res, next) => {
     const { amount, currency, CartID, items, phone, address, tex, discount, email, CartName, name, userId } = req.body;

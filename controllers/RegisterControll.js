@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-
+const cloudinary = require('cloudinary').v2;
 
 // Register a new user
 const Users = async (req, res) => {
@@ -36,8 +36,10 @@ const Users = async (req, res) => {
 // Update User Profile
 const updateUserProfile = async (req, res) => {
     const { name, phone, address, city, country, zip } = req.body;
+    const pathToFile = req.file.path;
 
     try {
+        const result = await cloudinary.uploader.upload(pathToFile);
         // Check Email
         if (!req.params.id) {
             return res.status(400).json({ message: 'Please provide an id' });
@@ -45,7 +47,7 @@ const updateUserProfile = async (req, res) => {
         // Check if image is provided
         let image;
         if (req.file) {
-            image = req.file.filename;
+            image = result.secure_url;
         }
         const user = await User.findByIdAndUpdate(req.params.id, { name, image, city, address, phone, country, zip }, { new: true });
         res.json({ message: 'User profile updated successfully', user });

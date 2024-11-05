@@ -29,8 +29,11 @@ const productSchema = new mongoose.Schema({
     rating:{
         type: Number,
         default: 0
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
-    
 })
 
 const Products = mongoose.model('Product', productSchema);

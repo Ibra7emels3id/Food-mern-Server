@@ -9,12 +9,16 @@ const CarRouterClint = require('./Router/CardRouter')
 const CategoryRouterClint = require('./Router/CategoryRouter')
 const PaymentRouterClint = require('./Router/PaymentRouter')
 const ReviewRouterClint = require('./Router/ReviewRouter')
+const ConnectCloudinary = require('./Config/ConnectCloudinary')
 const port = 3000
 
 
 
 // Connect to the server MongoDB 
 ConnectDb()
+
+// 
+ConnectCloudinary()
 
 // dotenv;
 require('dotenv').config();
