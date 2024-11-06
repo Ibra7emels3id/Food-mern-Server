@@ -25,7 +25,7 @@ const Users = async (req, res) => {
             role: 'user'
         });
         // Save the user to the database
-        await newUser.save();
+        newUser.save();
         res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {
         console.error(error);
@@ -35,20 +35,25 @@ const Users = async (req, res) => {
 
 // Update User Profile
 const updateUserProfile = async (req, res) => {
-    const { name, phone, address, city, country, zip } = req.body;
-    const pathToFile = req.file.path;
+    const { name, phone, address, city, country, zip, image } = req.body;
 
     try {
-        const result = await cloudinary.uploader.upload(pathToFile);
+        const existingUser = await User.findById(req.params.id);
+        // Check if image is provided
+        let image;
+        if (req.file) {
+            let pathToFile = req.file.path;
+            const result = await cloudinary.uploader.upload(pathToFile);
+            image = result.secure_url;
+        } else {
+            image = existingUser.image;
+        }
+
         // Check Email
         if (!req.params.id) {
             return res.status(400).json({ message: 'Please provide an id' });
         }
-        // Check if image is provided
-        let image;
-        if (req.file) {
-            image = result.secure_url;
-        }
+
         const user = await User.findByIdAndUpdate(req.params.id, { name, image, city, address, phone, country, zip }, { new: true });
         res.json({ message: 'User profile updated successfully', user });
     } catch (error) {
