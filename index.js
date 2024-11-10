@@ -10,6 +10,7 @@ const CategoryRouterClint = require('./Router/CategoryRouter')
 const PaymentRouterClint = require('./Router/PaymentRouter')
 const ReviewRouterClint = require('./Router/ReviewRouter')
 const ConnectCloudinary = require('./Config/ConnectCloudinary')
+const ExportBanners = require('./Router/BannersRouter')
 const port = 3000
 
 
@@ -55,6 +56,8 @@ app.use('/api', CarRouterClint)
 app.use('/api', CategoryRouterClint)
 app.use('/api', PaymentRouterClint)
 app.use('/api', ReviewRouterClint)
+app.use('/api', ExportBanners)
+
 
 
 

@@ -110,10 +110,27 @@ const confirmPayment = async (req, res, next) => {
     }
 };
 
+// Delete Payment Order
+const deletePayment = async (req, res, next) => {
+    try {
+        const payment = await CartPay.findByIdAndDelete(req.params.id);
+
+        if (!payment) {
+            return res.status(404).json({ message: 'Payment not found' });
+        }
+
+        res.status(200).json(payment);
+    } catch (error) {
+        console.error('Error deleting payment:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 
 module.exports = {
     PaymentConntrol,
     getCartPayment,
     getAllPayment,
     confirmPayment,
+    deletePayment,
 }
